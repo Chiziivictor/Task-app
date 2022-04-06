@@ -15,8 +15,13 @@ import { db } from "../firebase";
 import styled from "styled-components";
 
 const Container = styled.div`
+  min-height: 70vh;
+`;
+
+const Wrapper = styled.div`
   margin: 5%;
-  max-width: max-content;
+  max-width: 400px;
+  box-shadow: 1px 1px 10px 0px #888888;
 `;
 
 const Tasks = () => {
@@ -47,22 +52,24 @@ const Tasks = () => {
   };
 
   return (
-    <Container className="card">
-      <div className="card-body">
-        <h5 className="card-title mb-4">My Tasks</h5>
-        <AddTask />
-        <div>
-          {todos.map((todo) => (
-            <TaskList
-              key={todo.id}
-              todo={todo}
-              toggleComplete={toggleComplete}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-            />
-          ))}
+    <Container>
+      <Wrapper className="card">
+        <div className="card-body">
+          <h4 className="card-title mb-4 mx-4">My Tasks</h4>
+          <AddTask />
+          <div>
+            {todos.map((todo) => (
+              <TaskList
+                key={todo.id}
+                todo={todo}
+                toggleComplete={toggleComplete}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      </Wrapper>
     </Container>
   );
 };

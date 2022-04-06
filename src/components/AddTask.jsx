@@ -9,7 +9,21 @@ const TaskInput = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const AddButton = styled.button``;
+const Title = styled.input`
+  margin-left: 10px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid;
+  transition: all 200ms ease-in-out;
+`;
+const AddButton = styled.button`
+  background: none;
+  border: none;
+  transition: all 200ms ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 const AddTask = () => {
   const [title, setTitle] = useState("");
@@ -26,17 +40,17 @@ const AddTask = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TaskInput className="mb-3">
-        <input
+    <form onSubmit={handleSubmit} autoComplete="off">
+      <TaskInput className="mb-5">
+        <Title
           type="text"
-          className="form-control"
           id="exampleInputPassword1"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          placeholder="Add Task"
         />
         <div>
-          <AddButton type="submit" className="btn">
+          <AddButton type="submit">
             <MdAddCircle style={{ fontSize: "35px" }} />
           </AddButton>
         </div>
