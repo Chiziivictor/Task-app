@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BiCheckCircle, BiCircle, BiEditAlt } from "react-icons/bi";
 import { MdDeleteOutline, MdOutlineCancel } from "react-icons/md";
-import Edit from "./Edit";
 import { Modal, Box } from "@mui/material";
 
-const Title = styled.h1`
-  width: 250px;
+const Wrapper = styled.div`
+  padding: 10px;
+  display: flex;
+  align-items: center;
+`;
+const TaskContent = styled.div`
+  display: flex;
+  width: 90%;
+`;
+const Title = styled.div`
+  width: 70%;
+  overflow-wrap: break-word;
   margin-left: 10px;
   border: none;
   outline: none;
@@ -21,7 +30,6 @@ const TitleEdit = styled.textarea`
   border-bottom: 1px solid;
   transition: all 200ms ease-in-out;
 `;
-
 const Button = styled.button`
   background: none;
   border: none;
@@ -29,12 +37,6 @@ const Button = styled.button`
   &:hover {
     transform: scale(1.1);
   }
-`;
-const Wrapper = styled.div`
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 `;
 const iconStyle = {
   fontSize: "25px",
@@ -49,7 +51,6 @@ const modalButtonStyle = {
 
 const TaskList = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
   const [newTitle, setNewTitle] = useState(todo.title);
-  const [showEdit, setShowEdit] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
@@ -60,10 +61,6 @@ const TaskList = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
       todo.title = "";
       setNewTitle(e.target.value);
     }
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
   };
 
   return (
@@ -126,18 +123,20 @@ const TaskList = ({ todo, toggleComplete, handleDelete, handleEdit }) => {
             <BiCircle id="i" style={iconStyle} />
           </Button>
         )}
-        <Title type="text" style={{ color: todo.completed && "green" }}>
-          {todo.title === "" ? newTitle : todo.title}
-        </Title>
+        <TaskContent>
+          <Title type="text" style={{ color: todo.completed && "green" }}>
+            {todo.title === "" ? newTitle : todo.title}
+          </Title>
 
-        {!todo.completed && (
-          <Button onClick={(e) => setOpen(true)}>
-            <BiEditAlt id="i" style={iconStyle} />
+          {!todo.completed && (
+            <Button onClick={(e) => setOpen(true)}>
+              <BiEditAlt id="i" style={iconStyle} />
+            </Button>
+          )}
+          <Button onClick={() => handleDelete(todo.id)}>
+            <MdDeleteOutline style={iconStyle} />
           </Button>
-        )}
-        <Button onClick={() => handleDelete(todo.id)}>
-          <MdDeleteOutline style={iconStyle} />
-        </Button>
+        </TaskContent>
       </Wrapper>
     </>
   );

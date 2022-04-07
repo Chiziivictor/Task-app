@@ -1,6 +1,8 @@
 import Navbar from "./components/Navbar";
 import Tasks from "./components/Tasks";
 import styled from "styled-components";
+import Login from "./Login";
+import SignUp from "./SignUp";
 
 const Footer = styled.footer`
   padding: 14px;
